@@ -1,7 +1,7 @@
 """Create a url conf"""
 
-from django.conf.urls import url
-
+from django.conf.urls import url, include
+from django.contrib import admin
 from . import views
 
 urlpatterns = [
