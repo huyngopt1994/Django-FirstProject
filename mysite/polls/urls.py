@@ -1,9 +1,11 @@
 """Create a url conf"""
 
 from django.conf.urls import url, include
-from django.contrib import admin
-from . import views
 
+from . import views
+# using namespace like c++
+
+app_name = 'polls'
 # wire some url to view
 urlpatterns = [
     #ex: /polls/
