@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>Result of survey form</title>
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+</head>
+<body>
+    <header>
+        Thanks for submitting this form! You have submitted this form
+        {{ request.session.counter }} times
+    </header>
+
+    <div>
+        <h3>Your submitted survey form</h3>
+        <p>Name: {{ request.session.name }}</p>
+        <p>Location: {{ request.session.location }}</p>
+        <p>Language: {{ request.session.language }}</p>
+        <p>Comment: {{ request.session.comment }}</p>
+
+        <form action="/" method="get">
+        <input type="submit" value="Back">
+    </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+label {
+display: block
+}
+div {
+position: relative;
+width: 350px;
+margin : 0 auto;
+display: block;
+padding: 20px;
+border: 2px solid;
+}
+input ,select, textarea {
+position : absolute;
+left: 150px;
+}

@@ -1,0 +1,27 @@
+
+header, div {
+width: 300px;
+margin: 0 auto;
+border: 2px solid;
+padding:10px;
+margin-bottom:50px
+}
+
+header {
+background: lightgreen;
+}
+
+form {
+text-align: right;
+}
+h3  {
+text-decoration: underline;
+
+}
+
+input{
+color: white;
+background-color: blue;
+box-shadow: 5px 10px black;
+}
+
