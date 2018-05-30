@@ -1,17 +1,25 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Clock</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
 </head>
 <body>
 
-<p>The current time and date:</p>
-<div>
-    <h2> {{ date }} </h2>
-    <h2> {{ time }} </h2>
+<div class="wrapper">
+        <p>Random Word(attempt # {{ request.session.counter }})</p>
+
+        <div>
+            {{ request.session.string }}
+        </div>
+        <br>
+        <form action="/generate" method="POST">
+             {% csrf_token %}
+            <input type="submit" value="Generate">
+        </form>
 </div>
+
 </body>
 </html>
