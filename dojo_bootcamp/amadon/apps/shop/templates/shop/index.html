@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Amadon</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
 </head>
 <body>
 <h1>Amadon Store</h1>
+<a href="clear"><button>Clear history of shopping</button></a>
 <table>
     <tr>
         <th>Item</th>
@@ -14,12 +17,12 @@
     </tr>
     {% for item in items %}
         <tr>
-            <th>{{ item.name }}</th>
-            <th>{{ item.price }}</th>
-            <th>
+            <th class="name">{{ item.name }}</th>
+            <th class="price">{{ item.price }}</th>
+            <th class="action">
 
-                <form action="amadon/buy/{{item.id}}">
-                     {% crsf_token %}
+                <form action=buy/{{item.id}} method="POST" ">
+                     {% csrf_token %}
                     <select name="quantity">
                         <option value="1">1</option>
                         <option value="2">2</option>

@@ -1,0 +1,21 @@
+th {
+border :2px solid;
+padding:5px;
+}
+table {
+border-spacing:0;
+}
+.name{
+width:200px;
+}
+.price {
+width:100px;
+}
+.action {
+width: 300px;
+text-align: left;
+padding-left:10px;
+}
+select {
+margin-right:10px;
+}

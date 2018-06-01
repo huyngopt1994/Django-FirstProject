@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Amadon Checkout</title>
 </head>
 <body>
+<h1>Thanks you for your business</h1>
+<p>We charged your credit card for {{request.session.price}} <br>
+    You have ordered {{ request.session.number }} items so far and spent ${{request.session.money}} with Amadon.com!
+</p>
+<p>Total quantity : {{ request.session.total_quantity}}</p>
+<p>Total Money: {{request.session.total_money }}</p>
 
+<a href="/amadon/">Go back</a>
 </body>
 </html>
