@@ -1,3 +1,25 @@
 .big {
 font-size: 26px;
 }
+section , article {
+display: inline-block;
+vertical-align: top;
+padding: 20px;
+}
+div {
+width: 600px;
+margin: 0 auto;
+}
+section {
+border-right: 2px solid;
+}
+button {
+background-color: pink;
+width: 120px;
+height: 50px;
+box-shadow: 5px 10px;
+margin-bottom: 50px;
+position: relative;
+left:200px;
+
+}

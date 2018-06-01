@@ -27,13 +27,13 @@ def add_word(request):
     temp_list.append(new_word)
 
     request.session['data'] = temp_list
-    for key, val in request.session.items():
+    for key, val in request.session.iteritems():
         print (key, val)
     print ("past craeted at", new_word)
 
     return redirect('/session_words')
 
 def clear(request):
-    for key in request.session.keys():
+    for key in list(request.session.keys()):
         del request.session[key]
     return redirect('/session_words')
