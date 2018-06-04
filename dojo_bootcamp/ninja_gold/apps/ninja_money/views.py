@@ -26,11 +26,13 @@ def process_money(request,my_type):
 		'class': action,
 		'message': "You {} {} golds from the {} ({})".format(action, abs(this_gold), my_type, time_now)
 	}
-	try:
-		log_list = request.session['logs']
-	except KeyError:
-		log_list = []
 
+	if 'logs' not in request.session:
+		request.session['logs'] = [new_log,]
+	else:
+		logs = request.session['logs']
+		logs.append(new_log)
+		request.session['logs'] = logs
 	request.session['total'] += this_gold
 
 	log_list.append(this_log)

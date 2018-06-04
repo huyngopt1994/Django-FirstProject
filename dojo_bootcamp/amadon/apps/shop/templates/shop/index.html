@@ -21,7 +21,7 @@
             <th class="price">{{ item.price }}</th>
             <th class="action">
 
-                <form action=buy/{{item.id}} method="POST" ">
+                <form action="buy/{{item.id}}" method="POST" >
                      {% csrf_token %}
                     <select name="quantity">
                         <option value="1">1</option>
