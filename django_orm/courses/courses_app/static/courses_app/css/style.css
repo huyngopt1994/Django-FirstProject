@@ -1,0 +1,47 @@
+.success {
+color : green;
+}
+.error {
+color: red;
+}
+table {
+border-spacing: 0px;
+}
+th, td {
+border: 1px solid black;
+padding : 5px;
+}
+
+.no {
+background-color: gray;
+color: white;
+}
+
+.yes {
+background-color: red;
+color : white;
+}
+.main_content{
+text-align :center;
+}
+.content {
+margin: 0 auto;
+text-align:left;
+width: 600px;
+}
+footer {
+text-align:center;
+}
+label {
+vertical-align :top;
+}
+
+.input_text {
+position: relative;
+left: 100px;
+}
+
+.textarea {
+position: relative;
+left: 60px;
+}

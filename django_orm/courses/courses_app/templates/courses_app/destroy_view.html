@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete a course</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'courses_app/css/style.css' %}">
+</head>
+<body>
+    <div class="main_content">
+        <div class="content">
+            <h3>Are you sure you want to delete the following course</h3>
+            <p>Name:        {{data.name}}</p>
+            <p>Description: {{data.desc}}</p>
+            <footer>
+            <a href="{% url 'index' %}"><button class="no">No</button></a>
+            <a href="{% url 'confirm_destroy' course_id=data.id %}"><button class="yes">Yes I want to delete this button</button></a>
+        </footer>
+        </div>
+
+
+    </div>
+
+</body>
+</html>

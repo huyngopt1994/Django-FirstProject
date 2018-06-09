@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a student to all bootcamp courses</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'courses_app/css/style.css' %}">
+</head>
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+
+      <p class="{{ message.tags }}" >{{ message }}  </p>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+<h1>Add a new course</h1>
+<form action="{% url 'create' %}" method="post">
+     {% csrf_token %}
+
+    <label>
+        Name: <input class="input_text" type="text" name="name">
+    </label>
+    <br>
+    <br>
+    <label>
+        Description : <textarea class="textarea" name="desc" id="" cols="30" rows="7"></textarea>
+    </label>
+    <br>
+    <input type="submit" value="Add">
+</form>
+<h1>Courses</h1>
+<table>
+    <tr>
+        <th>Course name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for course in courses %}
+        <tr>
+            <td>{{course.name}}</td>
+            <td>{{course.desc}}</td>
+            <td>{{course.created_at}}</td>
+            <td><a href="{% url 'destroy_view' course_id=course.id %}">Remove</a></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
