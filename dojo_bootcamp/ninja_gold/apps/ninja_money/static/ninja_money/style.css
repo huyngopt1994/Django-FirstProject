@@ -20,7 +20,7 @@ form {
     padding: 5px;
     overflow-y: scroll;
 }
-    .message-log > p{
+.message-log > p{
         margin: 5px;
     }
 .earned {
