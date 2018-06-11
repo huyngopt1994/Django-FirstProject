@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login & Reg | Success</title>
+</head>
+<body>
+<h1>Congratulation you just {{ request.session.type }} successfully</h1>
+<h1>Your information</h1>
+<p>First name: {{ first_name }}</p>
+<p>Last name: {{ last_name }}</p>
+<p>Email: {{ email }}</p>
+
+<a href="/"><button>Go back</button></a>
+</body>
+</html>
