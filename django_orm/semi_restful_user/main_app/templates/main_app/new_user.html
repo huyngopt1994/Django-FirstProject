@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Users New</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_app/css/index.css' %}">
 </head>
 <body>
     <h1>Add a new user</h1>
     <form action="{% url 'create_user' %}" method="POST">
         {% csrf_token %}
-        <p>First name:</p>
-        <input type="text" name="first_name">
-        <p>Last Name:</p>
-        <input type="text" name="last_name">
-        <p>Email:</p>
+        <p class="title">First name:</p>
+        <input type="text" name="first_name"> <br>
+        <p class="title">Last Name:</p>
+        <input type="text" name="last_name"><br>
+        <p class="title">Email:</p>
         <input type="text" name="email">
-
+        <br>
+        <br>
         <input type="submit" value="Create">
     </form>
     <br>
