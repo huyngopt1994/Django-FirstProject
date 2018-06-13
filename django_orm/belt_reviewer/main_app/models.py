@@ -9,7 +9,7 @@ class User(models.Model):
 	alias = models.CharField(max_length=255)
 	email = models.EmailField()
 	password = models.CharField(max_length=255)
-	created_at = models.CharField(auto_now_add=True)
+	created_at = models.DateTimeField(auto_now_add=True)
 
 class Book(models.Model):
 	title = models.CharField(max_length=255)
@@ -17,3 +17,9 @@ class Book(models.Model):
 	poster = models.ForeignKey(User, related_name="uploaded_books")
 	
 
+# Create a middle table to handle many to many relationship
+
+class Review(models.Model):
+	content = models.TextField()
+	user_review = models.ForeignKey('User', related_name="reviews")
+	reviewed_book = models.ForeignKey('Book', related_name="reviews")
