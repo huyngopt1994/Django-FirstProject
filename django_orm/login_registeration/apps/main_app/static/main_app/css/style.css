@@ -1,0 +1,21 @@
+.title {
+display: inline-block;
+width: 130px;
+}
+
+form {
+border: 0.5px solid blue;
+width:  400px;
+padding: 10px;
+margin-bottom: 30px;
+}
+h2{
+margin-left : 50px;
+}
+.submit {
+position: relative;
+left: 300px;
+box-shadow: 5px 5px;
+background-color: blue;
+color: white;
+}

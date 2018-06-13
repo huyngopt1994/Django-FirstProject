@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login & Reg | Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
 </head>
 <body>
     {% if messages %}
@@ -28,9 +30,11 @@
     <p class="title">Confirm Password:</p>
     <input type="password" name="confirm_password">
     <br>
-    <input type="submit" value="Register">
+    <input class="submit" type="submit" value="Register">
 
 </form>
+
+    <h2>Login</h2>
 <form action="/login" method="post">
     {% csrf_token %}
      <p class="title">Email:</p>
@@ -39,7 +43,7 @@
     <p class="title">Password:</p>
     <input type="password" name="password">
     <br>
-    <input type="submit" value="Login">
+    <input class="submit" type="submit" value="Login">
 </form>
 </body>
 </html>
