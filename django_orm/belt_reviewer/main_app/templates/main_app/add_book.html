@@ -5,6 +5,53 @@
     <title>Title</title>
 </head>
 <body>
+<header>
+    <a href="/books">Home</a>
+    {% if request.session.user %}
+        <a href="/logout">Logout</a>
+    {% else %}
+    <a href="/login">Login</a>
+    {% endif %}
+</header>
+<h3>Add a new book Title and a review</h3>
+<main>
+    <form action="/books/add" method="POST">
+        {% csrf_token %}
+         <p class="title">Book Title:</p>
+            <input type="text" name="title">
+        <br>
+        <ul>
+            <li>
+                Choose from a list:
+                <select name="default_author">
+                    {% for author in authors %}
+                    <option value="{{ author}} ">{{ author }}</option>
+                    {% endfor %}
+                </select>
+            </li>
+            <li>
+                Or add a new author:
+                <input type="text" name="new_author">
+            </li>
+        </ul>
+        <div class="text_area">
+            <p class="title">Review</p>
+            <textarea name="review" cols="30" rows="10"></textarea>
+        </div>
+
+        <label>
+            Rating: <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        </label>
+        <input type="submit" value="Add book and review">
+    </form>
+
+</main>
 
 </body>
 </html>

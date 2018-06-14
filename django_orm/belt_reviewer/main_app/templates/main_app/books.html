@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Home</title>
+
+</head>
+<body>
+    <header>
+        <p>Welcome {{user_name}}</p>
+        <p><a href="/books/add">Add Book and Review</a> <a href="/logout">Logout</a></p>
+    </header>
+    <main>
+        <div class="left_content">
+            {% for item in items %}
+                <a href="/books/{{item.id}}">{{item.title}}</a>
+                <p>Rating: {{ item.rating }}</p>
+                <p>{{item.name}} says: {{item.content}}</p>
+                <p>Posted on {{item.created_at}}</p>
+            {% endfor %}
+        </div>
+        <div class="right_content">
+            {% for book in books %}
+                <p><a href="/books/{{bookl.id}}">{{book.title}}</a></p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

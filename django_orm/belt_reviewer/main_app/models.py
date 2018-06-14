@@ -4,10 +4,11 @@ from django.db import models
 
 import bcrypt
 import re
+from datetime import datetime
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 
-NAME_REGEX = re.compile(r'^[A-Za-z]\w+$') # because your name should start from a character
+NAME_REGEX = re.compile(r'^[A-Za-z]+\s?[a-zA-z]+$') # because your name should start from a character
 # \w can include alphanumeric character, underscore as well.
 # Create your models here.
 
@@ -56,6 +57,7 @@ class UserManager(models.Manager):
 			errors.append('email is incorrect')
 		return errors
 
+
 class User(models.Model):
 	name = models.CharField(max_length=255)
 	alias = models.CharField(max_length=255)
@@ -65,15 +67,18 @@ class User(models.Model):
 
 	objects = UserManager()
 
+
 class Book(models.Model):
 	title = models.CharField(max_length=255)
 	author = models.CharField(max_length=255)
 	poster = models.ForeignKey(User, related_name="uploaded_books")
-	
+	created_at = models.DateTimeField(auto_now_add=True)
+
 
 # Create a middle table to handle many to many relationship
-
 class Review(models.Model):
+	rating = models.IntegerField(default=0)
 	content = models.TextField()
-	user_review = models.ForeignKey('User', related_name="reviews")
-	reviewed_book = models.ForeignKey('Book', related_name="reviews")
+	reviewer = models.ForeignKey('User', related_name="reviews_left")
+	book = models.ForeignKey('Book', related_name="reviews")
+	created_at = models.DateTimeField(auto_now_add=True)

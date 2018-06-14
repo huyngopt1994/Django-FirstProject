@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+    <header>
+        <a href="/">Home</a>
+        <a href="/books/add">Add Book and Review</a>
+        {% if request.session.user_id %}
+            <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/">Login</a>
+        {% endif %}
+    </header>
+    <main>
+        {% if request.session.user_id %}
+            <h2>User Alias: {{user.alias}}</h2>
+            <p>Name: {{user.name}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Total Reviews: {{ total_reviews }}</p>
+            <br><br>
+        <p>Posted Reviews on the following books: </p>
+            {% for book in books %}
+                <a href="/books/{{book.id}}">{{book.title}}</a>
+            {% endfor %}
+        {% else %}
+            <p>PLease login to access your information</p>
+        {% endif %}
+
+    </main>
 
 </body>
 </html>
