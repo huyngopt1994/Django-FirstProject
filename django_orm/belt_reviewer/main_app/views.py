@@ -47,13 +47,32 @@ def logout(request):
 
 def show_books(request):
 	# This is method to show all books
-	print(request.session['user_id'])
 	if request.session['user_id'] is None:
 		messages.error('You should login if want to show informations')
 		return redirect('/')
 	else:
 		# get detaied informations for books
-		return render(request,'main_app/books.html')
+		item={} #dictionary for item
+		items =[]
+		# query 3 lastest reviews (desencding
+		all_reviews = Review.objects.all().order_by('-created_at')
+		reviews = all_reviews[:3]
+		for review in reviews:
+			item['created_at'] = review.created_at
+			item['rating'] = review.rating
+			item['content'] = review.content
+			item['user_name'] =review.reviewer.name
+			item['title'] =review.book.title
+			item['id'] = review.book.id
+			items.append(item)
+			item = {}
+		print(items)
+		books = set()
+		# list all book which had reviews:
+		for review in all_reviews:
+
+			books.add((review.book.id, review.book.title))
+		return render(request,'main_app/books.html',{'items':items,'books':books})
 
 def add_book(request):
 	if request.session['user_id'] is None:
@@ -62,7 +81,9 @@ def add_book(request):
 	else:
 		if request.method == 'GET':
 			# This is GET method to render html file
-			return render(request, 'main_app/add_book.html')
+			authors = Book.objects.all().values('author').distinct()
+			print(authors)
+			return render(request, 'main_app/add_book.html', {'authors': authors})
 		if request.method == 'POST':
 			post_data = request.POST
 			if len(post_data['new_author']) >0:
@@ -91,11 +112,25 @@ def show_book(request, book_id):
 		messages.error(request, 'You should login if want to show informations')
 		return redirect('/')
 	else:
-		return render(request, 'main_app/book.html')
+		book = Book.objects.get(id = book_id)
+		print(book.author)
+		all_reviews = book.reviews.all().order_by('-created_at')
+		my_reviews = []
+		my_review = {}
+		reviews= all_reviews[:3]
+		for review in reviews:
+			my_review['rating'] = review.rating
+			my_review['user_name'] = review.reviewer.name
+			my_review['created_at'] = review.created_at
+			my_review['user_id'] = review.reviewer.id
+			my_reviews.append(my_review)
+			my_review = {}
+
+		return render(request, 'main_app/book.html', {'reviews': my_reviews,
+		                                              'book':book})
 
 def show_user(request, user_id):
 	"""This is method to render information for a user."""
-	print(request.session['user_id'])
 	if request.session['user_id'] is None:
 		messages.error('You should login if want to show informations')
 		return redirect('/')
@@ -111,5 +146,8 @@ def show_user(request, user_id):
 		                                             'total_reviews': total_reviews,
 		                                              'books':books})
 
+def delete_review(request, review_id):
+	pass
 
-
+def create_review(request, book_id):
+	pass

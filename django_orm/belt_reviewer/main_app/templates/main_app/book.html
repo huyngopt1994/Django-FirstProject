@@ -5,6 +5,43 @@
     <title>Add Book and Review</title>
 </head>
 <body>
-
+<header>
+    <a href="/books">Home</a> <a href="/logout">Logout</a>
+</header>
+<main>
+    <h3>Divergent</h3>
+    <p>Author: {{book.author}}</p>
+    <div class="left_content">
+        <h2>Reviews</h2>
+        {% for review in reviews %}
+            <div class="content">
+                <p>Rating: {{review.rating}}</p>
+                <p>{{review.user_name}} says: {{review.content}}</p>
+                
+                <p>{{review.created_at}}</p>
+                {% if review.user_id == request.session.user_id %}
+                <a href="/delete/review/{{review.id}}">Delete this Review</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="right_content">
+        <form action="/create/review/{{book.id}}">
+            <h3>Add a Review</h3>
+            <textarea name="custom_review"  cols="30" rows="10"></textarea>
+            <br>
+            <label>
+                Ratings: <select name="custom_rating" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected="selected">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select> stars
+            </label>
+            <input type="submit" value="Submit Review">
+        </form>
+    </div>
+</main>
 </body>
 </html>

@@ -15,13 +15,13 @@
             {% for item in items %}
                 <a href="/books/{{item.id}}">{{item.title}}</a>
                 <p>Rating: {{ item.rating }}</p>
-                <p>{{item.name}} says: {{item.content}}</p>
+                <p>{{item.user_name}} says: {{item.content}}</p>
                 <p>Posted on {{item.created_at}}</p>
             {% endfor %}
         </div>
         <div class="right_content">
             {% for book in books %}
-                <p><a href="/books/{{bookl.id}}">{{book.title}}</a></p>
+                <p><a href="/books/{{book.0}}">{{book.1}}</a></p>
             {% endfor %}
         </div>
     </main>
