@@ -30,6 +30,9 @@ class UserManager(models.Manager):
 			errors.append('your name should contain only alpha characters')
 		if (not re.match(EMAIL_REGEX, post_data['email'])):
 			errors.append('email is invalid')
+		# verifi the email was used or not
+		if len(User.objects.filter(email=post_data['email'])) >0:
+			errors.append('email was used')
 		# verify the confirm_password and password
 		if  post_data['confirm_password'] != post_data['password']:
 			errors.append('confirm_password doesn"t match with password')

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add book</title>
      {% load static %}
     <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'main_app/css/header.css' %}">
@@ -27,7 +27,7 @@
 
                 <select name="default_author">
                     {% for author in authors %}
-                    <option value="{{ author}} ">{{ author.author }}</option>
+                    <option value="{{ author.author}} ">{{ author.author }}</option>
                     {% endfor %}
                 </select>
         <br>
