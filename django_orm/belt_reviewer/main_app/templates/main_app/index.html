@@ -7,46 +7,50 @@
     <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
 </head>
 <body>
+    <main>
     {% if messages %}
         {% for message in messages %}
           <p class="{{ message.tags }}">{{ message }}</p>
         {% endfor %}
     {% endif %}
     <h1>Welcome!</h1>
-    <main>
-        <h2>Registration</h2>
-        <form action="/register" method="post">
-            {% csrf_token %}
-            <p class="title">Name:</p>
-            <input type="text" name="name">
-            <br>
-            <p class="title">Alias:</p>
-            <input type="text" name="alias">
-            <br>
-            <p class="title">Email:</p>
-            <input type="email" name="email">
-            <br>
-            <p class="title">Password:</p>
-            <input type="password" name="password">
-            <br>
-            <p class="title">Confirm Password:</p>
-            <input type="password" name="confirm_password">
-            <br>
-            <input class="submit" type="submit" value="Register">
+        <div class="register">
+            <h2>Registration</h2>
+            <form action="/register" method="post">
+                {% csrf_token %}
+                <p class="title">Name:</p>
+                <input type="text" name="name">
+                <br>
+                <p class="title">Alias:</p>
+                <input type="text" name="alias">
+                <br>
+                <p class="title">Email:</p>
+                <input type="email" name="email">
+                <br>
+                <p class="title">Password:</p>
+                <input type="password" name="password">
+                <br>
+                <p class="title">Confirm Password:</p>
+                <input type="password" name="confirm_password">
+                <br> <br>
+                <input class="submit" type="submit" value="Register">
+            </form>
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                {% csrf_token %}
+                 <p class="title">Email:</p>
+                <input type="email" name="email">
+                <br>
+                <p class="title">Password:</p>
+                <input type="password" name="password">
+                <br><br>
+                <input class="submit" type="submit" value="Login">
+            </form>
+        </div>
 
-        </form>
 
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            {% csrf_token %}
-             <p class="title">Email:</p>
-            <input type="email" name="email">
-            <br>
-            <p class="title">Password:</p>
-            <input type="password" name="password">
-            <br>
-            <input class="submit" type="submit" value="Login">
-        </form>
     </main>
 </body>
 </html>

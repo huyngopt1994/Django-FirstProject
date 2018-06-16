@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main_app/css/header.css' %}">
 </head>
 <body>
     <header>
-        <a href="/">Home</a>
-        <a href="/books/add">Add Book and Review</a>
-        {% if request.session.user_id %}
+        <p class="header_right">
+            <a href="/">Home</a>
+            <a href="/books/add">Add Book and Review</a>
             <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/">Login</a>
-        {% endif %}
+
+
+        </p>
+
     </header>
-    <main>
+    <main class="user_content">
         {% if request.session.user_id %}
-            <h2>User Alias: {{user.alias}}</h2>
+            <h2 style="font-weight: none">User Alias: {{user.alias}}</h2>
             <p>Name: {{user.name}}</p>
             <p>Email: {{user.email}}</p>
             <p>Total Reviews: {{ total_reviews }}</p>
             <br><br>
         <p>Posted Reviews on the following books: </p>
+        <div>
             {% for book in books %}
+            <p>
                 <a href="/books/{{book.id}}">{{book.title}}</a>
+            </p>
+
             {% endfor %}
+        </div>
+
         {% else %}
             <p>PLease login to access your information</p>
         {% endif %}

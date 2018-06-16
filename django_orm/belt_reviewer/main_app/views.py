@@ -35,7 +35,6 @@ def login(request):
 			user = User.objects.get(email=post_data['email'])
 			request.session['user_id'] = user.id
 			# ok should redirect to main_page
-			print(request.session['user_id'])
 			return redirect('/books')
 
 def logout(request):
@@ -59,14 +58,15 @@ def show_books(request):
 		reviews = all_reviews[:3]
 		for review in reviews:
 			item['created_at'] = review.created_at
-			item['rating'] = review.rating
+			item['rating'] = range(review.rating)
+			item['un_rating'] = range(5- review.rating)
 			item['content'] = review.content
 			item['user_name'] =review.reviewer.name
 			item['title'] =review.book.title
 			item['id'] = review.book.id
+			item['user_id'] = review.reviewer.id
 			items.append(item)
 			item = {}
-		print(items)
 		books = set()
 		# list all book which had reviews:
 		for review in all_reviews:
@@ -82,7 +82,6 @@ def add_book(request):
 		if request.method == 'GET':
 			# This is GET method to render html file
 			authors = Book.objects.all().values('author').distinct()
-			print(authors)
 			return render(request, 'main_app/add_book.html', {'authors': authors})
 		if request.method == 'POST':
 			post_data = request.POST
@@ -113,16 +112,17 @@ def show_book(request, book_id):
 		return redirect('/')
 	else:
 		book = Book.objects.get(id = book_id)
-		print(book.author)
 		all_reviews = book.reviews.all().order_by('-created_at')
 		my_reviews = []
 		my_review = {}
 		reviews= all_reviews[:3]
 		for review in reviews:
-			my_review['rating'] = review.rating
+			my_review['rating'] = range(review.rating)
+			my_review['un_rating'] = range(5 - review.rating)
 			my_review['user_name'] = review.reviewer.name
 			my_review['created_at'] = review.created_at
 			my_review['user_id'] = review.reviewer.id
+			my_review['content'] =review.content
 			my_reviews.append(my_review)
 			my_review = {}
 
@@ -146,8 +146,30 @@ def show_user(request, user_id):
 		                                             'total_reviews': total_reviews,
 		                                              'books':books})
 
-def delete_review(request, review_id):
-	pass
+def delete_review(request, book_id, review_id):
+	if request.session['user_id'] is None:
+		messages.error('You should login if want to show informations')
+		return redirect('/')
+	else:
+		try:
+			review = Review.objects.get(id=review_id)
+			review.delete()
+		except Exception as e:
+			print('we can"t delete this review %s' % e)
+		return redirect('/books/%s' % book_id)
 
 def create_review(request, book_id):
-	pass
+	if request.session['user_id'] is None:
+		messages.error('You should login if want to show informations')
+		return redirect('/')
+	else:
+		if request.method == "POST":
+			post_data = request.POST
+			user = User.objects.get(id =request.session['user_id'])
+			book = Book.objects.get(id = book_id)
+
+			Review.objects.create(rating= post_data['custom_rating'],
+								  content = post_data['custom_review'],
+								  reviewer= user,
+								  book = book)
+			return redirect('/books/%s' % book_id)

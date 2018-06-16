@@ -43,10 +43,9 @@ def register(request):
 
             # ok the password so good ,  so we will create new row for new input data
             user = User.objects.create(first_name=input_data['first_name'],
-                                last_name = input_data['last_name'],
-                                email= input_data['email'],
-                                password= hashed
-                                )
+                                       last_name = input_data['last_name'],
+                                       email= input_data['email'],
+                                       password= hashed)
 
             # should save user name  to session
             request.session['user_id'] = user.id
