@@ -1,4 +1,4 @@
-# Django-Projects
+# Flask-Django-Projects
 ## Introductions
 It will includes a lot of projects which was built from django and flask (using orm , ajax)
 ## NOTE
